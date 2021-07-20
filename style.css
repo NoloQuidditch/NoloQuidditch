@@ -1,0 +1,43 @@
+td{
+	text-align: center;
+	border: solid;
+}
+
+
+
+table {
+	border: solid;
+	font-family: Tangerine;
+	background-image: url("img/pergamena.jfif");
+}
+
+img{
+	width: 100px;
+}
+
+h1{
+	font-family: Tangerine;
+	color: white;
+	background-color: #100642;
+	font-size: 3em;
+	font-weight: bold;
+	text-decoration: none !important;
+}
+
+caption {
+	font-size: 5em;
+	font-weight: bold;
+	color: white;
+}
+
+body {
+	background-color: #100642;
+}
+
+a {
+	color: white;
+}
+a img {
+	height: 70px;
+	width: auto;
+}
