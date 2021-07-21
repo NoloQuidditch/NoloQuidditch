@@ -41,3 +41,8 @@ a img {
 	height: 70px;
 	width: auto;
 }
+
+label {
+	font-family: Tangerine;
+	color: white;
+}
