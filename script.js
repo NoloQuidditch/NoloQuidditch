@@ -22,6 +22,10 @@ app.get('/', function(req,res){
 	res.send("ciao sono il server")))*/
 
 
+
+console.log('This is after the read call');
+
+
 app.get("/items", (req, res) => (
 	res.send("ciao sono gli items")))
 
@@ -32,8 +36,16 @@ router.get('/', function (req, res) {
   res.send("TODO. Elenco utenti")})
 
 
-app.post("/", function(req, res){
-     console.log("Ricevuto una richiesta POST");
+const fs = require('fs');
+ let users;
+ fs.readFile('users.json', (err, data) => {
+    users = JSON.parse(data);
+    if (err) throw err; 
+    console.log(users);
+    });
+    
+app.post("/", function(req, res){ 
+    console.log("Ricevuto una richiesta POST");
     // contenuto della richiesta
     console.log(req.body);
     // username
@@ -41,7 +53,37 @@ app.post("/", function(req, res){
     // password
     console.log(req.body.pass);
     //aprire json e confrontarlo
-});
+
+   let consentito = false
+
+    for (let i = 0; i < users.length; i++) 
+
+
+  { 
+   
+    if (req.body.username == users[i].utente && 
+        req.body.pass == users[i].password)
+    {
+       consentito = true;
+       ruolo = users[i].ruolo;
+    }
+}
+
+    if (consentito){
+        if (ruolo == "amministatore"){
+             res.sendFile(path.join(__dirname + '/public/new.html'));
+        }
+        else{
+            res.sendFile(path.join(__dirname + '/public/item.html'  ));
+        }
+      
+    }
+    else {res.send('<h1> accesso negato </h1>');};
+   })
+
+
+
+
 
 //preparare oggetto response
 
@@ -59,24 +101,6 @@ app.post("/", function(req, res){
 };*/
 
 
-const fs = require('fs');
-
-
-fs.readFile('users.json', (err, data) => {
-    if (err) throw err;
-    let users = JSON.parse(data);
-    console.log(users);
-});
-
-if (req.body.username == users[1].utente && req.body.pass == users[1].password)
-{
-    document.write ('<h1> accesso consentito </h1>');
-}
-else { document.write ('<h1> accesso negato </h1>');}
-
-//non funziona l'if
-
-console.log('This is after the read call');
 
 /*app.listen(3000, function(){
 	console.log("la porta 3000 è in ascolto")
@@ -85,13 +109,13 @@ console.log('This is after the read call');
 //PRODURRE HTML
 
 
-fs.readFile('users.json', (err, data) => {
+/*fs.readFile('users.json', (err, data) => {
     if (err) throw err;
     let users = JSON.parse(data);
     console.log(users);
 });
 
-console.log('This is after the read call');
+console.log('This is after the read call');*/
 
 
 /*let student = { 
